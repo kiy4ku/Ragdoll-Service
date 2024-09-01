@@ -1,3 +1,7 @@
 {
-  "robloxLsp.diagnostics.disable": ["trailing-space"]
+  "robloxLsp.diagnostics.disable": ["trailing-space"],
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua",
+    "editor.formatOnSave": true
+  }
 }
