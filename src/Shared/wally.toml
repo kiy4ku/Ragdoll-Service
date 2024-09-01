@@ -1,0 +1,14 @@
+[package]
+name = "kiy4ku/ragdoll-service"
+description = "Easy-to-use and lightweight ragdoll service for Roblox Games"
+version = "1.0.1"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+license = "MIT"
+authors = ["kiy4ku"]
+
+[dependencies]
+component = "sleitnick/component@2.4.8"
+trove = "sleitnick/trove@1.4.0"
+warp = "imezx/warp@1.0.12"
+promise = "evaera/promise@4.0.0"
