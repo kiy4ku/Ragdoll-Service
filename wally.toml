@@ -1,6 +1,7 @@
 [package]
-name = "kiyak/shared"
-version = "0.1.0"
+name = "kiy4ku/ragdoll-service"
+description = "Easy-to-use and lightweight ragdoll service for Roblox Games"
+version = "1.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
