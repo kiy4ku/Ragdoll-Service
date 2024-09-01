@@ -30,5 +30,8 @@ jobs:
       - name: Run Selene
         run: selene --allow-warnings ./src
 
-      - name: Validate Stylua
-        run: stylua -c ./src
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@v3
+        with:
+          version: latest
+          args: --check ./src
