@@ -1,6 +1,14 @@
 {
   "name": "Ragdoll-Service",
   "tree": {
-    "$path": "src"
+    "$path": "src",
+
+    "Shared": {
+      "$path": "src/Shared",
+
+      "Packages": {
+        "$path": "Packages"
+      }
+    }
   }
 }
