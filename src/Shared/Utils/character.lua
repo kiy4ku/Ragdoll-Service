@@ -9,10 +9,7 @@ local debris = game:GetService('Debris')
 local shared = script.Parent.Parent
 
 local utils = shared:WaitForChild('Utils')
-local packages = shared:WaitForChild('Packages')
-
 local assert = require(utils:WaitForChild('assert'))
-local promise = require(packages:WaitForChild('promise'))
 
 local isServer = runService:IsServer()
 

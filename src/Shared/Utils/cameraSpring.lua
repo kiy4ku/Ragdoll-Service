@@ -7,7 +7,7 @@ local shared = script.Parent.Parent
 local utils = shared:WaitForChild('Utils')
 local packages = shared:WaitForChild('Packages')
 
-local springUtil = require(utils:WaitForChild('cameraSpring'))
+local springUtil = require(utils:WaitForChild('spring'))
 local assert = require(utils:WaitForChild('assert'))
 
 local trove = require(packages:WaitForChild('trove'))

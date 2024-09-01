@@ -4,12 +4,13 @@
 local players = game:GetService('Players')
 
 local shared = script.Parent.Parent
-local utils = shared.Utils
-local mainUtils = shared.Parent.Utils
+local utils = shared:WaitForChild('Utils')
+local packages = shared:WaitForChild('Packages')
 
-local assert = require(mainUtils.assert)
-local trove = require(mainUtils.trove)
-local characterUtil = require(utils.characterUtil)
+local assert = require(utils:WaitForChild('assert'))
+local characterUtil = require(utils:WaitForChild('character'))
+
+local trove = require(packages:WaitForChild('trove'))
 
 local module = {}
 module.__index = module
