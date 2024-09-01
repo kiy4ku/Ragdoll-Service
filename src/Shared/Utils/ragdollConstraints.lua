@@ -4,9 +4,10 @@
 local shared = script.Parent.Parent
 local utils = shared.Utils
 
-local characterUtil = require(utils.characterUtil)
-local assert = require(utils.assert)
-local constants = require(shared.Constants)
+local characterUtil = require(utils:WaitForChild('character'))
+local assert = require(utils:WaitForChild('assert'))
+
+local constants = require(shared:WaitForChild('Constants'))
 
 export type attachmentMapType = {[string]: {Attachment}?}
 export type constraintInfoValue = {
@@ -118,7 +119,7 @@ function ragdollConstraints:getAttachmentMap(character: Model): attachmentMapTyp
 			if attachment0 then
                 attachment0:Destroy()
             end
-            
+
 			if attachment1 then
                 attachment1:Destroy()
             end

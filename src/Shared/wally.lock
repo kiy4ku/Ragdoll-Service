@@ -15,7 +15,7 @@ dependencies = []
 [[package]]
 name = "kiyak/shared"
 version = "0.1.0"
-dependencies = [["component", "sleitnick/component@2.4.8"], ["trove", "sleitnick/trove@1.4.0"], ["warp", "imezx/warp@1.0.12"]]
+dependencies = [["component", "sleitnick/component@2.4.8"], ["promise", "evaera/promise@4.0.0"], ["trove", "sleitnick/trove@1.4.0"], ["warp", "imezx/warp@1.0.12"]]
 
 [[package]]
 name = "sleitnick/component"
