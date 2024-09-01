@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          node-version: '20'  # Explicitly use Node 20
 
       # Setup tools
       - name: Run aftman
