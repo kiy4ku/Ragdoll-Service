@@ -37,7 +37,7 @@ function Client:logs()
 	return ClientProcess.getlogs(self.id)
 end
 
-function Client:Fire(reliable: boolean,...: any)
+function Client:Fire(reliable: boolean, ...: any)
 	ClientProcess.insertQueue(self.id, reliable, ...)
 end
 
@@ -48,10 +48,10 @@ end
 function Client:Connect(callback: (args: any) -> ())
 	local key = tostring(Key())
 	local _middleware = Middleware(key)
-	
+
 	table.insert(self.fn, key)
 	self.middleware[key] = _middleware
-	
+
 	self.IsConnected = #self.fn > 0
 	ClientProcess.addCallback(self.id, key, function(...)
 		if _middleware.bridge(...) then
@@ -65,10 +65,10 @@ end
 function Client:Once(callback: (args: any) -> ())
 	local key = tostring(Key())
 	local _middleware = Middleware(key)
-	
+
 	table.insert(self.fn, key)
 	self.middleware[key] = _middleware
-	
+
 	self.IsConnected = #self.fn > 0
 	ClientProcess.addCallback(self.id, key, function(...)
 		self:Disconnect(key)
@@ -83,7 +83,7 @@ end
 function Client:Wait()
 	local thread: thread, t = coroutine.running(), os.clock()
 	self:Once(function()
-		task.spawn(thread, os.clock()-t)
+		task.spawn(thread, os.clock() - t)
 	end)
 	return coroutine.yield()
 end

@@ -24,7 +24,7 @@ return function(Identifier: string, timeout: number?): number
 		end)
 		task.spawn(function()
 			while coroutine.status(cancel) ~= "dead" and task.wait(0.5) do -- let it loop for yields!
-				if (Event:GetAttribute(Identifier)) then
+				if Event:GetAttribute(Identifier) then
 					task.cancel(cancel)
 					task.spawn(yieldThread, Event:GetAttribute(Identifier))
 					break

@@ -52,7 +52,7 @@ end
 function Signal:Wait(): number
 	local thread, t = coroutine.running(), os.clock()
 	self:Once(function()
-		task.spawn(thread, os.clock()-t)
+		task.spawn(thread, os.clock() - t)
 	end)
 	return coroutine.yield()
 end
@@ -71,18 +71,24 @@ end
 
 function Signal:FireTo(signal: string, ...: any): ()
 	local to = Signals[signal]
-	if not to then return end
+	if not to then
+		return
+	end
 	Signal.Fire(to, ...)
 end
 
 function Signal:Invoke(key: string, ...: any): ()
 	local to = self[key]
-	if not to then return end
+	if not to then
+		return
+	end
 	return to.fn(...)
 end
 
 function Signal:InvokeTo(signal: string, key: string, ...: any): ()
-	if not Signals[signal] then return end
+	if not Signals[signal] then
+		return
+	end
 	return Signal.Invoke(Signals[signal], key, ...)
 end
 

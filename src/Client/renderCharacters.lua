@@ -1,33 +1,33 @@
 --!native
 --!optimize 2
 
-local players = game:GetService('Players')
-local debris = game:GetService('Debris')
+local players = game:GetService("Players")
+local debris = game:GetService("Debris")
 
 local localPlayer = players.LocalPlayer
 local camera = workspace.CurrentCamera
 
-local shared = script.Parent.Parent:WaitForChild('Shared')
+local shared = script.Parent.Parent:WaitForChild("Shared")
 
-local classes = shared:WaitForChild('Classes')
-local ragdollClass = require(classes:WaitForChild('ragdoll'))
+local classes = shared:WaitForChild("Classes")
+local ragdollClass = require(classes:WaitForChild("ragdoll"))
 
 local renderCharacters = {}
 
 function onCharacterRemoving(_: Player, oldCharacter: Model)
-	if not oldCharacter:FindFirstChild('Humanoid') or not oldCharacter:FindFirstChild('HumanoidRootPart') then
+	if not oldCharacter:FindFirstChild("Humanoid") or not oldCharacter:FindFirstChild("HumanoidRootPart") then
 		return
 	end
 
 	oldCharacter.Archivable = true
 
 	local character = oldCharacter:Clone()
-	character.Name ..= '_Clone'
-	character:RemoveTag('Ragdoll')
-	
+	character.Name ..= "_Clone"
+	character:RemoveTag("Ragdoll")
+
 	character.Parent = workspace
-	
-	local humanoid = character:FindFirstChild('Humanoid')
+
+	local humanoid = character:FindFirstChild("Humanoid")
 
 	debris:addItem(oldCharacter, 0)
 
@@ -35,19 +35,19 @@ function onCharacterRemoving(_: Player, oldCharacter: Model)
 		localPlayer.Character = nil
 		camera.CameraSubject = humanoid
 	end
-	
-	humanoid:AddTag('Ragdoll')
+
+	humanoid:AddTag("Ragdoll")
 
 	ragdollClass.new(character)
-	
+
 	for _, v: BasePart in character:GetDescendants() do
-		if not v:IsA('BasePart') then
+		if not v:IsA("BasePart") then
 			continue
 		end
-		
-		v:AddTag('ignoreCamera')
+
+		v:AddTag("ignoreCamera")
 	end
-	
+
 	task.delay(players.RespawnTime, function()
 		ragdollClass:destroy()
 		debris:addItem(character, 0)

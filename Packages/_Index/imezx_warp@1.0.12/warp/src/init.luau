@@ -10,7 +10,7 @@ return {
 	Client = Index.Client,
 	fromServerArray = Index.fromServerArray,
 	fromClientArray = Index.fromClientArray,
-	
+
 	Signal = Index.Signal,
 	fromSignalArray = Index.fromSignalArray,
 

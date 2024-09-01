@@ -4,7 +4,7 @@
 local Middleware = {}
 Middleware.__index = Middleware
 
-local function wrap(middleware: (...any) -> (...any)): (...any) -> boolean
+local function wrap(middleware: (...any) -> ...any): (...any) -> boolean
 	return function(...): boolean
 		local obj: any = { ... }
 		local s, r = pcall(function()
@@ -29,7 +29,7 @@ function Middleware.new(key: string)
 	}, Middleware)
 end
 
-function Middleware:middleware(middleware: (...any) -> (...any))
+function Middleware:middleware(middleware: (...any) -> ...any)
 	self.bridge = wrap(middleware)
 	return self
 end

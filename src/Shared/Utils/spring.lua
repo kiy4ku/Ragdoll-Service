@@ -42,7 +42,6 @@ API:
 		Impulses the spring, increasing velocity by the amount given
 ]]
 
-
 local Spring = {}
 
 --- Creates a new spring
@@ -51,12 +50,12 @@ function Spring.new(initial)
 	local target = initial or 0
 
 	return setmetatable({
-		_time0 = tick();
-		_position0 = target;
-		_velocity0 = 0*target;
-		_target = target;
-		_damper = 1;
-		_speed = 1;
+		_time0 = tick(),
+		_position0 = target,
+		_velocity0 = 0 * target,
+		_target = target,
+		_damper = 1,
+		_speed = 1,
 	}, Spring)
 end
 
@@ -70,7 +69,7 @@ end
 -- @param delta now to skip forwards
 function Spring:TimeSkip(delta)
 	local now = tick()
-	local position, velocity = self:_positionVelocity(now+delta)
+	local position, velocity = self:_positionVelocity(now + delta)
 	self._position0 = position
 	self._velocity0 = velocity
 	self._time0 = now
@@ -136,36 +135,34 @@ function Spring:_positionVelocity(now)
 	local d = self._damper
 	local s = self._speed
 
-	local t = s*(now - self._time0)
-	local d2 = d*d
+	local t = s * (now - self._time0)
+	local d2 = d * d
 
 	local h, si, co
 	if d2 < 1 then
 		h = math.sqrt(1 - d2)
-		local ep = math.exp(-d*t)/h
-		co, si = ep*math.cos(h*t), ep*math.sin(h*t)
+		local ep = math.exp(-d * t) / h
+		co, si = ep * math.cos(h * t), ep * math.sin(h * t)
 	elseif d2 == 1 then
 		h = 1
-		local ep = math.exp(-d*t)/h
-		co, si = ep, ep*t
+		local ep = math.exp(-d * t) / h
+		co, si = ep, ep * t
 	else
 		h = math.sqrt(d2 - 1)
-		local u = math.exp((-d + h)*t)/(2*h)
-		local v = math.exp((-d - h)*t)/(2*h)
+		local u = math.exp((-d + h) * t) / (2 * h)
+		local v = math.exp((-d - h) * t) / (2 * h)
 		co, si = u + v, u - v
 	end
 
-	local a0 = h*co + d*si
-	local a1 = 1 - (h*co + d*si)
-	local a2 = si/s
+	local a0 = h * co + d * si
+	local a1 = 1 - (h * co + d * si)
+	local a2 = si / s
 
-	local b0 = -s*si
-	local b1 = s*si
-	local b2 = h*co - d*si
+	local b0 = -s * si
+	local b1 = s * si
+	local b2 = h * co - d * si
 
-	return
-		a0*p0 + a1*p1 + a2*v0,
-	b0*p0 + b1*p1 + b2*v0
+	return a0 * p0 + a1 * p1 + a2 * v0, b0 * p0 + b1 * p1 + b2 * v0
 end
 
 return Spring

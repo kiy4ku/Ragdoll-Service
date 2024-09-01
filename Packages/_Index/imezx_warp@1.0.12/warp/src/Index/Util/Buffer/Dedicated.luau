@@ -35,7 +35,6 @@ function DedicatedBuffer.alloc(self: any, byte: number)
 	local size: number = self.size
 	local b: buffer = self.buffer
 
-
 	while self.point + byte >= size do
 		size = math.floor(size * 1.5)
 	end
@@ -45,7 +44,7 @@ function DedicatedBuffer.alloc(self: any, byte: number)
 
 	b = newBuffer
 
-	self.point  = self.next
+	self.point = self.next
 	self.next += byte
 end
 
@@ -58,55 +57,73 @@ function DedicatedBuffer.build(self: any): buffer
 end
 
 function DedicatedBuffer.wi8(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(1)
 	writei8(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wi16(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(2)
 	writei16(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wi32(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(4)
 	writei32(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wu8(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(1)
 	writeu8(self.buffer, self.point, val)
 end
 
-function  DedicatedBuffer.wu16(self: any, val: number)
-	if not val then return end
+function DedicatedBuffer.wu16(self: any, val: number)
+	if not val then
+		return
+	end
 	self:alloc(2)
 	writeu16(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wu32(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(4)
 	writeu32(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wf32(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(4)
 	writef32(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wf64(self: any, val: number)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(8)
 	writef64(self.buffer, self.point, val)
 end
 
 function DedicatedBuffer.wstring(self: any, val: string)
-	if not val then return end
+	if not val then
+		return
+	end
 	self:alloc(#val)
 	writestring(self.buffer, self.point, val)
 end
@@ -123,7 +140,7 @@ function DedicatedBuffer.new()
 		point = default.point,
 		next = default.next,
 		size = default.size,
-		buffer = create(default.bufferSize)
+		buffer = create(default.bufferSize),
 	}, DedicatedBuffer)
 end
 

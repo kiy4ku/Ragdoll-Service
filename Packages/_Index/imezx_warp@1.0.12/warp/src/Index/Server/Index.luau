@@ -49,14 +49,23 @@ end
 
 function Server:FireExcept(reliable: boolean, except: { Player }, ...: any)
 	for _, player: Player in ipairs(Players:GetPlayers()) do
-		if table.find(except, player) then continue end
+		if table.find(except, player) then
+			continue
+		end
 		ServerProcess.insertQueue(self.id, reliable, player, ...)
 	end
 end
 
 function Server:FireIn(reliable: boolean, range: number, from: Vector3, data: { any }, except: { Player }?)
 	for _, player: Player in ipairs(Players:GetPlayers()) do
-		if (except and table.find(except, player)) or not player.Character or not player.Character.PrimaryPart or (player.Character.PrimaryPart.Position - from).Magnitude < range then continue end
+		if
+			(except and table.find(except, player))
+			or not player.Character
+			or not player.Character.PrimaryPart
+			or (player.Character.PrimaryPart.Position - from).Magnitude < range
+		then
+			continue
+		end
 		ServerProcess.insertQueue(self.id, reliable, player, table.unpack(data))
 	end
 end
@@ -68,10 +77,10 @@ end
 function Server:Connect(callback: (plyer: Player, args: any) -> ())
 	local key = tostring(Key())
 	local _middleware = Middleware(key)
-	
+
 	table.insert(self.fn, key)
 	self.middleware[key] = _middleware
-	
+
 	self.IsConnected = #self.fn > 0
 	ServerProcess.addCallback(self.id, key, function(...)
 		if _middleware.bridge(...) then
@@ -85,10 +94,10 @@ end
 function Server:Once(callback: (plyer: Player, args: any) -> ())
 	local key = tostring(Key())
 	local _middleware = Middleware(key)
-	
+
 	table.insert(self.fn, key)
 	self.middleware[key] = _middleware
-	
+
 	self.IsConnected = #self.fn > 0
 	ServerProcess.addCallback(self.id, key, function(...)
 		self:Disconnect(key)
@@ -103,7 +112,7 @@ end
 function Server:Wait()
 	local thread: thread, t = coroutine.running(), os.clock()
 	self:Once(function()
-		task.spawn(thread, os.clock()-t)
+		task.spawn(thread, os.clock() - t)
 	end)
 	return coroutine.yield()
 end

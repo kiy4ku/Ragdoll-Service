@@ -1,3 +1,3 @@
 require(script.Parent.TestEZ).TestBootstrap:run({
-	game:GetService("ServerScriptService").Test
+	game:GetService("ServerScriptService").Test,
 })

@@ -12,14 +12,14 @@ function RateLimit.create(Identifier: string, entrance: number?, interval: numbe
 	if RunService:IsServer() then
 		Assert(typeof(entrance) == "number", "entrance must a number type.")
 		Assert(entrance :: number > 0, "entrance must above 0.")
-		Event:SetAttribute(Identifier.."_ent", entrance)
-		Event:SetAttribute(Identifier.."_int", interval)
+		Event:SetAttribute(Identifier .. "_ent", entrance)
+		Event:SetAttribute(Identifier .. "_int", interval)
 	else
-		while (not Event:GetAttribute(Identifier.."_ent")) or (not Event:GetAttribute(Identifier.."_int")) do
+		while (not Event:GetAttribute(Identifier .. "_ent")) or (not Event:GetAttribute(Identifier .. "_int")) do
 			task.wait(0.5)
 		end
-		entrance = tonumber(Event:GetAttribute(Identifier.."_ent"))
-		interval = tonumber(Event:GetAttribute(Identifier.."_int"))
+		entrance = tonumber(Event:GetAttribute(Identifier .. "_ent"))
+		interval = tonumber(Event:GetAttribute(Identifier .. "_int"))
 	end
 	local entrances: number = 0
 	return function(incoming: number?): boolean

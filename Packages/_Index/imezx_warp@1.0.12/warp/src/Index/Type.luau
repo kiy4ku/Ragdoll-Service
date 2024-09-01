@@ -20,7 +20,7 @@ export type ClientConf = {
 }
 
 export type Middleware = {
-	middleware: (self: Middleware, middleware: (...any) -> (...any)) -> (),
+	middleware: (self: Middleware, middleware: (...any) -> ...any) -> (),
 	key: (self: Middleware) -> string,
 	destroy: (self: Middleware) -> (),
 }
@@ -53,8 +53,8 @@ export type Server = {
 export type Signal = {
 	Fire: (self: Signal, ...any) -> (),
 	FireTo: (self: Signal, Identifier: string, ...any) -> (),
-	Invoke: (self: Signal, ...any) -> (...any?),
-	InvokeTo: (self: Signal, Identifier: string, ...any) -> (...any?),
+	Invoke: (self: Signal, ...any) -> ...any?,
+	InvokeTo: (self: Signal, Identifier: string, ...any) -> ...any?,
 	Connect: (self: Signal, callback: (...any) -> ()) -> string,
 	Once: (self: Signal, callback: (...any) -> ()) -> string,
 	Disconnect: (self: Signal, key: string) -> (),
@@ -72,27 +72,27 @@ export type Event = {
 export type QueueMap = {
 	[string]: {
 		[any]: any,
-	}
+	},
 }
 
 export type CallbackMap = {
-	[string]: (any),
+	[string]: any,
 }
 
 export type StoredRatelimit = {
-	[string]: any
+	[string]: any,
 }
 
 export type fromServerArray = {
-	[string]: Server
+	[string]: Server,
 }
 
 export type fromClientArray = {
-	[string]: Client
+	[string]: Client,
 }
 
 export type fromSignalArray = {
-	[string]: Signal
+	[string]: Signal,
 }
 
 return nil

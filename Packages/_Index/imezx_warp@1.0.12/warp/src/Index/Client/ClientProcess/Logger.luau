@@ -4,11 +4,11 @@
 local Logger = {}
 local Logs: {
 	[string]: {
-		[string]: string
-	}
+		[string]: string,
+	},
 } = {}
 local logging: {
-	[string]: boolean
+	[string]: boolean,
 } = {}
 
 local now = tick()
